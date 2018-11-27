@@ -7,6 +7,7 @@
 </select>
 
 查看Selenium代码select.py文件的实现：
+```Python
 class Select:
 
     def __init__(self, webelement):
@@ -28,7 +29,8 @@ class Select:
         self._el = webelement
         multi = self._el.get_attribute("multiple")
         self.is_multiple = multi and multi != "false"
-        
+```
+
 查看Select类的实现需要一个元素的定位。并且Example中给了例句：
 
 Select(driver.find_element_by_tag_name("select")).select_by_index(2)
