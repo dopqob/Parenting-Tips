@@ -1,4 +1,6 @@
 API
+------
+```Python
 def swipe(self, start_x, start_y, end_x, end_y, duration=None):
     """Swipe from one point to another point, for an optional duration.
 
@@ -22,31 +24,29 @@ def swipe(self, start_x, start_y, end_x, end_y, duration=None):
         .release()
     action.perform()
     return self
+```
+- start_x - 滑动开始x轴坐标
+- start_y - 滑动开始y轴坐标
+- end_x - 滑动结束x轴偏移量
+- end_y - 滑动结束y轴偏移量
+- duration - (可选) 执行此次滑动时间，单位毫秒.
+- 其中end_x和 end_y 为基于start_x和start_y的偏移量。
+- 最终在执行中的 to_x = start_x+end_x 并非end_x
+- duration 参数单位为ms（默认5毫秒） 注意1s =1000ms
 
-start_x - 滑动开始x轴坐标
-start_y - 滑动开始y轴坐标
-end_x - 滑动结束x轴偏移量
-end_y - 滑动结束y轴偏移量
-duration - (可选) 执行此次滑动时间，单位毫秒.
-其中end_x和 end_y 为基于start_x和start_y的偏移量。
-最终在执行中的 to_x = start_x+end_x 并非end_x
-duration 参数单位为ms（默认5毫秒） 注意1s =1000ms
-
-示例：
-
-获取屏幕尺寸
+### 示例：
+```PYTHON
+# 获取屏幕尺寸
 def GetPageSize(self):
         x = self.driver.get_window_size()['width']
         y = self.driver.get_window_size()['height']
         return (x, y)
-
-左滑
-
-技巧：左滑是从较大x值 --->较小x值，所以 to_x=sx+(-ex)
-
-技巧：左滑时y轴值基本无变化，所以ey=0
-
-技巧：sx的值一定大于屏幕尺寸的53%，否则虽向左滑动但不能生效切换页面
+```
+#### 左滑:
+##### 技巧：左滑是从较大x值 --->较小x值，所以 to_x=sx+(-ex)
+##### 技巧：左滑时y轴值基本无变化，所以ey=0
+##### 技巧：sx的值一定大于屏幕尺寸的53%，否则虽向左滑动但不能生效切换页面
+```PYTHON
 def swipe_left(self):
       s = self.GetPageSize()
       sx = s[0] * 0.57
@@ -54,10 +54,10 @@ def swipe_left(self):
       ex = s[0] * 0.55
       ey = 0
       self.driver.swipe(sx, sy, -ex, ey, dt)
-
-右滑
-
-技巧：sx的值一定不能大于屏幕尺寸的 46%，否则虽然向右滑动但不能生效切换页面
+```
+#### 右滑
+##### 技巧：sx的值一定不能大于屏幕尺寸的 46%，否则虽然向右滑动但不能生效切换页面
+```PYTHON
 def swipe_right(self):
       s = self.GetPageSize()
       sx = s[0] * 0.43
@@ -65,16 +65,13 @@ def swipe_right(self):
       ex = s[0] * 0.54
       ey = 0
       self.driver.swipe(sx, sy, ex, ey, dt)
-
-上滑 （俗称上拉加载更多）
-
-技巧：上滑是从较大y值--->较小y值，所以to_y=sy+(-ey)
-
-技巧：上滑时x轴值基本无变化，所以ex = 0
-
-技巧：sx的值可s[0]范围内随意，sy和ey 需在 s[1]0.2 -- s[1]-s[1]0.4 之间取值，
-因为需要考虑：状态条、导航栏、底部功能栏等所占数值
-
+```
+#### 上滑 （俗称上拉加载更多）
+##### 技巧：上滑是从较大y值--->较小y值，所以to_y=sy+(-ey)
+##### 技巧：上滑时x轴值基本无变化，所以ex = 0
+##### 技巧：sx的值可s[0]范围内随意，sy和ey 需在 s[1]0.2 -- s[1]-s[1]0.4 之间取值，
+##### 因为需要考虑：状态条、导航栏、底部功能栏等所占数值
+```PYTHON
 def swipe_up(self):
      s = self.GetPageSize()
      sx = s[0] * 0.43
@@ -82,11 +79,11 @@ def swipe_up(self):
      ex = 0
      ey = s[1] * 0.55
      self.driver.swipe(sx, sy, ex, -ey, dt）
-
-下滑（俗称下拉刷新）
-
-技巧：sx的值可s[0]范围内随意，sy和ey 需在 s[1]*0.2 -- s[1]-s[1]*0.4 之间取值，
-因为需要考虑：状态条、导航栏、底部功能栏等所占数值
+```
+#### 下滑（俗称下拉刷新）
+##### 技巧：sx的值可s[0]范围内随意，sy和ey 需在 s[1]*0.2 -- s[1]-s[1]*0.4 之间取值，
+##### 因为需要考虑：状态条、导航栏、底部功能栏等所占数值
+```PYTHON
 def swipe_down(self):
       s = self.GetPageSize()
       sx = s[0] * 0.35
@@ -94,9 +91,10 @@ def swipe_down(self):
       ex = 0
       ey = s[1] * 0.55
       self.driver.swipe(sx, sy, ex, ey, dt)
+```
 
-
-左右上下滑屏代码实现
+#### 左右上下滑屏代码实现
+```PYTHON
 import os
 import time
 from appium import webdriver
@@ -130,3 +128,4 @@ driver.swipe(1/2*x, 1/2*y, 1/2*x, 1/7*y, 200)
 time.sleep(4)
 # 向下滑动
 driver.swipe(1/2*x, 1/7*y, 1/2*x, 6/7*y, 200)
+```
