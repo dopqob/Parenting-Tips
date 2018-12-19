@@ -1,4 +1,21 @@
 # Selenium处理Select标签的下拉框
+
+## 1.通过selenium.webdriver.support.ui的Select进行定位
+
+```Python
+from selenium.webdriver.support.ui import Select
+
+# 通过index进行选择
+Select(driver.find_element_by_id("gender")).select_by_index(1)
+
+# 通过value进行选择
+Select(driver.find_element_by_id("gender")).select_by_value("2")
+
+# 通过选项文字进行选择
+Select(driver.find_element_by_id("gender")).select_by_visible_text("Male")
+```
+`注：Select only works on elements（Select只对标签的下拉菜单有效).`
+
 ```Html
 <select id="status" class="form-control valid" onchange="" name="status">
     <option value=""></option>
@@ -88,3 +105,12 @@ Select(sel).select_by_value('1')  #初审通过
 Select(sel).select_by_value('2')  #复审通过
 Select(sel).select_by_value('3')  #审核不通过
 ```
+
+## 2.定位非标签的下拉菜单
+```Python
+# 先定位到下拉菜单 
+drop_down = driver.find_element_by_css_selector("div#select2_container > ul") 
+# 再对下拉菜单中的选项进行选择 
+drop_down.find_element_by_id("li2_input_2").click() 
+```
+`注：也可以用此方法定位标签的下拉菜单.`
