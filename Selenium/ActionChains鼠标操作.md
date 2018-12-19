@@ -1,10 +1,10 @@
 ActionChains鼠标操作
 -------------------
-#### Actionchains是Selenium里面专门处理鼠标相关的操作如：鼠标移动，鼠标按钮操作，按键和上下文菜单（鼠标右键）交互。这对于做更复杂的动作非常有用，比如悬停和拖放。
+#### `Actionchains`是`Selenium`里面专门处理鼠标相关的操作如：鼠标移动，鼠标按钮操作，按键和上下文菜单（鼠标右键）交互。这对于做更复杂的动作非常有用，比如悬停和拖放。
 
-#### actionchains也可以和快捷键结合起来使用，如ctrl,shif,alt结合鼠标一起使用
+#### `actionchains`也可以和快捷键结合起来使用，如ctrl,shif,alt结合鼠标一起使用
 
-#### 当你使用actionchains对象方法，行为事件是存储在actionchains对象队列。当你使用perform()，事件按顺序执行。
+#### 当你使用`actionchains`对象方法，行为事件是存储在`actionchains`对象队列。当你使用`perform()`，事件按顺序执行。
 
 * 方法一：可以写一长串
     ```Python
