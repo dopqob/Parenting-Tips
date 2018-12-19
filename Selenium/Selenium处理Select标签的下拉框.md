@@ -14,7 +14,7 @@ Select(driver.find_element_by_id("gender")).select_by_value("2")
 # 通过选项文字进行选择
 Select(driver.find_element_by_id("gender")).select_by_visible_text("Male")
 ```
-`注：Select only works on elements（Select只对标签的下拉菜单有效).`
+**`注：Select only works on elements（Select只对标签的下拉菜单有效).`**
 
 ```Html
 <select id="status" class="form-control valid" onchange="" name="status">
@@ -113,4 +113,4 @@ drop_down = driver.find_element_by_css_selector("div#select2_container > ul")
 # 再对下拉菜单中的选项进行选择 
 drop_down.find_element_by_id("li2_input_2").click() 
 ```
-`注：也可以用此方法定位标签的下拉菜单.`
+`**注：也可以用此方法定位标签的下拉菜单.**`
