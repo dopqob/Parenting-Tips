@@ -8,7 +8,7 @@
  1. frameset: 跟其他普通标签没有区别，不会影响到正常的定位
  2. frame与iframe对selenium定位而言是一样的，selenium有一组方法对frame进行操作
 
-#### 1.怎么切到frame中(switch_to.frame())
+#### 1. 怎么切到frame中(switch_to.frame())
 
 - selenium提供了switch_to.frame()方法来切换frame
 ```PYTHON
@@ -42,7 +42,7 @@ driver.switch_to.frame(driver.find_element_by_tag_name("iframe"))  # 4.用WebEle
 > index从0开始，传入整型参数即判定为用index定位，传入str参数则判定为用id/name定位WebElement对象，
 > 即用find_element系列方法所取得的对象，我们可以用tag_name、xpath等来定位frame对象
 
-#### 举个栗子：
+- 举个栗子：
 ```HTML
 <iframe src="myframetest.html" />
 ```
@@ -50,13 +50,14 @@ driver.switch_to.frame(driver.find_element_by_tag_name("iframe"))  # 4.用WebEle
 # 用xpath定位，传入WebElement对象：
 driver.switch_to.frame(driver.find_element_by_xpath("//iframe[contains(@src,'myframe')]"))
 ```
-#### 2.从frame中切回主文档(switch_to.default_content())**
+
+#### 2. 从frame中切回主文档(switch_to.default_content())**
 
 - 切到frame中之后，我们便不能继续操作主文档的元素，这时如果想操作主文档内容，则需切回主文档。
 ```PYTHON
 driver.switch_to.default_content()
 ```
-#### 3.嵌套frame的操作(switch_to.parent_frame())**
+#### 3. 嵌套frame的操作(switch_to.parent_frame())**
 
 - 有时候我们会遇到嵌套的frame，如下：
 ```HTML
@@ -66,12 +67,12 @@ driver.switch_to.default_content()
     </iframe>
 </html>
 ```
-1.从主文档切到frame2，一层层切进去
+- 从主文档切到frame2，一层层切进去
 ```PYTHON
 driver.switch_to.frame("frame1")
 driver.switch_to.frame("frame2")
 ```
-2.从frame2再切回frame1，这里selenium给我们提供了一个方法能够从子frame切回到父frame，而不用我们切回主文档再切进来。
+- 从frame2再切回frame1，这里selenium给我们提供了一个方法能够从子frame切回到父frame，而不用我们切回主文档再切进来。
 ```PYTHON
 driver.switch_to.parent_frame()  # 如果当前已是主文档，则无效果
 ```
